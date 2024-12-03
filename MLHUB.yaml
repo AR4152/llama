@@ -1,0 +1,16 @@
+--- # This is a comment and otherwise ignored.
+meta:
+  name         : llama
+  title        : MLHub package for RAG based personalized health queries
+  keywords     : health, privacy, rag, llm
+  version      : 0.0.1
+  languages    : py
+  license      : gpl3
+  author       : Graham.Williams@togaware.com
+  url          : https://github.com/AR4152/llama
+dependencies:
+  files:
+    - README.md
+    - query.py
+commands:
+  query: echos 'Hello world!'
