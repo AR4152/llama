@@ -6,7 +6,7 @@ meta:
   version      : 0.0.1
   languages    : py
   license      : gpl3
-  author       : Graham.Williams@togaware.com
+  author       : Arjun Raj
   url          : https://github.com/AR4152/llama
 dependencies:
   files:
