@@ -3,7 +3,7 @@ meta:
   name         : llama
   title        : MLHub package for RAG based personalized health queries
   keywords     : health, privacy, rag, llm
-  version      : 0.0.1
+  version      : 0.0.2
   languages    : py
   license      : gpl3
   author       : Arjun Raj
@@ -22,4 +22,4 @@ dependencies:
     - document.py
     - configure.sh
 commands:
-  query: echos 'Hello world!'
+  query: Answer medical queries using personal health information.
