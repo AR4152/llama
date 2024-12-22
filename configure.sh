@@ -6,9 +6,20 @@ echo "2. Install the Ollama tool on your system."
 echo "3. Pull a small-sized model called 'smollm' using Ollama.\n"
 
 # (a) set env var of health data folder
-read -p "Please enter the folder path where your health data exists: " folder_path
+echo "Please enter the folder path where your health data exists."
+read -p "Folder path: " folder_path
 export MLHUB_LLAMA_HEALTH_DATA="$folder_path"
-echo "Environment variable 'MLHUB_LLAMA_HEALTH_DATA' set to: $MLHUB_LLAMA_HEALTH_DATA"
+
+# Add the environment variable to shell configuration file
+shell_config_file="$HOME/.bashrc"
+if [[ -f $shell_config_file ]]; then
+    echo "export MLHUB_LLAMA_HEALTH_DATA=\"$folder_path\"" >> "$shell_config_file"
+    echo "Environment variable 'MLHUB_LLAMA_HEALTH_DATA' added to $shell_config_file"
+else
+    echo "Could not find shell configuration file. Please manually add the line below to your shell config file:"
+    echo "export MLHUB_LLAMA_HEALTH_DATA=\"$folder_path\""
+    sleep 10
+fi
 
 # (b) install ollama
 echo "Installing Ollama"
