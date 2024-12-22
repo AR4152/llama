@@ -14,7 +14,7 @@ export MLHUB_LLAMA_HEALTH_DATA="$folder_path"
 shell_config_file="$HOME/.bashrc"
 if [[ -f $shell_config_file ]]; then
     echo "export MLHUB_LLAMA_HEALTH_DATA=\"$folder_path\"" >> "$shell_config_file"
-    echo "Environment variable 'MLHUB_LLAMA_HEALTH_DATA' added to $shell_config_file"
+    echo "Environment variable 'MLHUB_LLAMA_HEALTH_DATA' added to $shell_config_file. Please run source $shell_config_file to update the configuration."
 else
     echo "Could not find shell configuration file. Please manually add the line below to your shell config file:"
     echo "export MLHUB_LLAMA_HEALTH_DATA=\"$folder_path\""
