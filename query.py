@@ -6,6 +6,7 @@
 # ----------------------------------------------------------------------
 
 import os
+import click
 from langchain_ollama import OllamaLLM
 from typing import Iterable
 
@@ -19,6 +20,9 @@ from document import fetch_data_embeddings
 # -----------------------------------------------------------------------
 # Command line argument and options
 # -----------------------------------------------------------------------
+
+@click.command()
+@click.argument("query", required=True)
 
 def cli(query: str):
     """
@@ -39,7 +43,7 @@ def cli(query: str):
         | StrOutputParser()
     )
 
-    print(rag_chain.invoke(query))
+    print(rag_chain.invoke(f'"{query}"'))
 
 # -----------------------------------------------------------------------
 # Helper Functions
@@ -62,4 +66,4 @@ def get_health_data_folder_path():
     return folder_path
     
 if __name__ == "__main__":
-    cli()
+    cli(prog_name="query")
