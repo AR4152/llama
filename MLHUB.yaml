@@ -9,8 +9,16 @@ meta:
   author       : Arjun Raj
   url          : https://github.com/AR4152/llama
 dependencies:
+  pip3:
+    - langchain_ollama
+    - langchain_core
+    - docling
+    - langchain_text_splitters
+    - langchain_huggingface
+    - langchain_milvus
   files:
     - README.md
     - query.py
+    - document.py
 commands:
   query: echos 'Hello world!'
