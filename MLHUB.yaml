@@ -20,5 +20,6 @@ dependencies:
     - README.md
     - query.py
     - document.py
+    - configure.sh
 commands:
   query: echos 'Hello world!'
