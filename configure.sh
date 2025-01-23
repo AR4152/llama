@@ -1,32 +1,59 @@
 #!/bin/bash
 
-echo "This script will:"
-echo "1. Set an environment variable 'MLHUB_LLAMA_HEALTH_DATA' with the path to your health data folder."
-echo "2. Install the Ollama tool on your system."
-echo "3. Pull a small-sized model called 'smollm' using Ollama.\n"
+# different level logger function
+log_message() {
+    local level="$1"
+    local message="$2"
+    echo -e "[$level] $message"
+}
 
-# (a) set env var of health data folder
-echo "Please enter the folder path where your health data exists."
-read -p "Folder path: " folder_path
-export MLHUB_LLAMA_HEALTH_DATA="$folder_path"
+# function to check if Ollama is already installed
+check_ollama_installed() {
+    if command -v ollama &>/dev/null; then
+        log_message "INFO" "Ollama is already installed on your system."
+        return 0
+    else
+        log_message "INFO" "Ollama is not installed. Proceeding with installation."
+        return 1
+    fi
+}
 
-# Add the environment variable to shell configuration file
-shell_config_file="$HOME/.bashrc"
-if [[ -f $shell_config_file ]]; then
-    echo "export MLHUB_LLAMA_HEALTH_DATA=\"$folder_path\"" >> "$shell_config_file"
-    echo "Environment variable 'MLHUB_LLAMA_HEALTH_DATA' added to $shell_config_file. Please run source $shell_config_file to update the configuration."
-else
-    echo "Could not find shell configuration file. Please manually add the line below to your shell config file:"
-    echo "export MLHUB_LLAMA_HEALTH_DATA=\"$folder_path\""
-    sleep 10
+# validate user input
+get_user_response() {
+    while true; do
+        echo "Do you want to proceed with the installation? (yes/no): "
+        read -p user_response
+        case "$user_response" in
+            yes|YES|Yes)
+                log_message "INFO" "User confirmed installation."
+                return 0 # Exit the function and proceed
+                ;;
+            no|NO|No)
+                log_message "INFO" "Installation aborted by the user."
+                exit 0
+                ;;
+            *)
+                log_message "ERROR" "Invalid input. Please enter 'yes' or 'no'."
+                ;;
+        esac
+    done
+}
+
+log_message "INFO" "This script will install the Ollama tool on your system."
+
+# check if Ollama is already installed
+if check_ollama_installed; then
+    log_message "SUCCESS" "No further action is required."
+    exit 0
 fi
 
-# (b) install ollama
-echo "Installing Ollama"
-curl -fsSL https://ollama.com/install.sh | sh
-echo "Installed Ollama"
+get_user_response
 
-# (c) pull a small sized model
-echo "Pulling a small-sized model using Ollama"
-ollama pull smollm
-echo "Small model 'smollm' pulled successfully"
+# proceed with installation if user confirmed
+log_message "INFO" "Installing Ollama..."
+if curl -fsSL https://ollama.com/install.sh | sh; then
+    log_message "SUCCESS" "Ollama has been successfully installed."
+else
+    log_message "ERROR" "Failed to install Ollama. Please check your internet connection or the installation script."
+    exit 1
+fi
