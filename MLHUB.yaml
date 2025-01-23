@@ -21,5 +21,10 @@ dependencies:
     - query.py
     - document.py
     - configure.sh
+    - pull.py
+    - list.py
+    - util.py
 commands:
   query: Answer medical queries using personal health information.
+  list: Lists all installed LLM models avaliable for use.
+  pull: Download LLM using Ollama.
