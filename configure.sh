@@ -21,8 +21,8 @@ check_ollama_installed() {
 # validate user input
 get_user_response() {
     while true; do
-        echo "Do you want to proceed with the installation? (yes/no): "
-        read -p user_response
+        echo "Do you want to proceed with the installation? [yes/no]: "
+        read user_response
         case "$user_response" in
             yes|YES|Yes)
                 log_message "INFO" "User confirmed installation."
